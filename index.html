@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Extensão para Chrome: um gatinho na tela que dorme, mia e pode ser movido.">
+  <title>Gato na Tela — extensão para Chrome</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Gato na Tela</h1>
+      <p class="tagline">Uma extensão leve para o Google Chrome</p>
+    </header>
+
+    <div class="cat-stage" aria-hidden="true">
+      <img src="cat-/catt.png" width="256" height="256" alt="Pixel art de um gato">
+    </div>
+
+    <section>
+      <h2>O que é</h2>
+      <p>
+        Esta extensão coloca um gatinho no seu navegador: ele aparece sobre as páginas que você visita,
+        pode dormir, miar e ser arrastado para o canto da tela que você preferir. É só para deixar o
+        dia um pouco mais simpático enquanto você trabalha ou estuda.
+      </p>
+    </section>
+
+    <section>
+      <h2>Código no GitHub</h2>
+      <p>
+        O projeto está aberto no GitHub: você pode ver o código, sugerir melhorias ou reportar problemas
+        por lá. Substitua o link ab pelo endereço real do seu repositório.
+      </p>
+      <p>
+        <a id="link-github" href="https://github.com/SEU_USUARIO/SEU_REPO" target="_blank" rel="noopener noreferrer">Abrir repositório no GitHub</a>
+      </p>
+    </section>
+
+    <section>
+      <h2>Como usar</h2>
+      <ol class="steps">
+        <li>Baixe o pacote da extensão usando o botão abaixo (após aceitar os termos).</li>
+        <li>No Chrome, abra <strong>chrome://extensions</strong>, ative o <strong>Modo do desenvolvedor</strong>.</li>
+        <li>Clique em <strong>Carregar sem compactação</strong> e escolha a pasta da extensão descompactada.</li>
+        <li>Fixe o ícone na barra de ferramentas, se quiser, e clique para ver o gato na tela.</li>
+      </ol>
+      <p style="margin-top: 0.75rem;">
+        Se você publicar na Chrome Web Store no futuro, pode trocar estas instruções por “instalar pela loja”.
+      </p>
+    </section>
+
+    <section class="card terms-block" aria-labelledby="terms-heading">
+      <h2 id="terms-heading">Termos de uso do download</h2>
+      <label>
+        <input type="checkbox" id="accept-terms" autocomplete="off">
+        <span>
+          Li e concordo com os termos: uso por conta e risco; a extensão é oferecida “no estado em que se encontra”,
+          sem garantias; não me responsabilizo por perdas ou danos; concordo em não usar o material de forma que viole
+          direitos de terceiros ou políticas do Chrome. Entendo que preciso aceitar para baixar.
+        </span>
+      </label>
+      <div class="terms-detail">
+        Ajuste o texto acima no HTML se quiser termos mais formais ou um link para uma página de política completa.
+      </div>
+
+      <div class="download-row">
+        <a
+          id="btn-download"
+          class="btn-download is-disabled"
+          href="#"
+          data-download-url="./gato-na-tela.zip"
+          aria-disabled="true">Baixar extensão (.zip)</a>
+        <span id="download-hint" class="hint">Marque a caixa acima para habilitar o download.</span>
+      </div>
+    </section>
+
+    <footer>
+      <p>Página estática em HTML/CSS — inspirada no visual de ferramentas ClanGen.</p>
+      <p class="credit">Sprite do gato: use o seu próprio arte ou credite conforme a licença da imagem.</p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var cb = document.getElementById("accept-terms");
+      var btn = document.getElementById("btn-download");
+      var hint = document.getElementById("download-hint");
+
+      function sync() {
+        var ok = cb.checked;
+        var url = btn.getAttribute("data-download-url") || "#";
+        if (ok) {
+          btn.classList.remove("is-disabled");
+          btn.setAttribute("href", url);
+          btn.setAttribute("download", "");
+          btn.removeAttribute("aria-disabled");
+        } else {
+          btn.classList.add("is-disabled");
+          btn.setAttribute("href", "#");
+          btn.removeAttribute("download");
+          btn.setAttribute("aria-disabled", "true");
+        }
+        hint.textContent = ok
+          ? "Download liberado."
+          : "Marque a caixa acima para habilitar o download.";
+      }
+
+      cb.addEventListener("change", sync);
+      btn.addEventListener("click", function (e) {
+        if (!cb.checked || btn.getAttribute("href") === "#") {
+          e.preventDefault();
+        }
+      });
+      sync();
+    })();
+  </script>
+</body>
+</html>
