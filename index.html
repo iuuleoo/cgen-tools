@@ -30,7 +30,7 @@
       <h2>Código no GitHub</h2>
       <p>
         O projeto está aberto no GitHub: você pode ver o código, sugerir melhorias ou reportar problemas
-        por lá. Substitua o link ab pelo endereço real do seu repositório.
+        por lá.
       </p>
       <p>
         <a id="link-github" href="https://github.com/iuuleoo/cat-extension" target="_blank" rel="noopener noreferrer">Abrir repositório no GitHub</a>
@@ -40,7 +40,7 @@
     <section>
       <h2>Como usar</h2>
       <ol class="steps">
-        <li>Baixe o pacote da extensão usando o botão abaixo (após aceitar os termos).</li>
+        <li>Clique em <strong>Instalar</strong> (após aceitar os termos) para ir ao repositório no GitHub.</li>
         <li>No Chrome, abra <strong>chrome://extensions</strong>, ative o <strong>Modo do desenvolvedor</strong>.</li>
         <li>Clique em <strong>Carregar sem compactação</strong> e escolha a pasta da extensão descompactada.</li>
         <li>Fixe o ícone na barra de ferramentas, se quiser, e clique para ver o gato na tela.</li>
@@ -51,13 +51,13 @@
     </section>
 
     <section class="card terms-block" aria-labelledby="terms-heading">
-      <h2 id="terms-heading">Termos de uso do download</h2>
+      <h2 id="terms-heading">Termos de uso</h2>
       <label>
         <input type="checkbox" id="accept-terms" autocomplete="off">
         <span>
           Li e concordo com os termos: uso por conta e risco; a extensão é oferecida “no estado em que se encontra”,
           sem garantias; não me responsabilizo por perdas ou danos; concordo em não usar o material de forma que viole
-          direitos de terceiros ou políticas do Chrome. Entendo que preciso aceitar para baixar.
+          direitos de terceiros ou políticas do Chrome. Entendo que preciso aceitar para continuar.
         </span>
       </label>
       <div class="terms-detail">
@@ -69,9 +69,9 @@
           id="btn-download"
           class="btn-download is-disabled"
           href="#"
-          data-download-url="./gato-na-tela.zip"
-          aria-disabled="true">Baixar extensão (.zip)</a>
-        <span id="download-hint" class="hint">Marque a caixa acima para habilitar o download.</span>
+          data-install-url="https://github.com/iuuleoo/cat-extension"
+          aria-disabled="true">Instalar</a>
+        <span id="download-hint" class="hint">Marque a caixa acima para habilitar.</span>
       </div>
     </section>
 
@@ -89,21 +89,23 @@
 
       function sync() {
         var ok = cb.checked;
-        var url = btn.getAttribute("data-download-url") || "#";
+        var url = btn.getAttribute("data-install-url") || "#";
         if (ok) {
           btn.classList.remove("is-disabled");
           btn.setAttribute("href", url);
-          btn.setAttribute("download", "");
+          btn.setAttribute("target", "_blank");
+          btn.setAttribute("rel", "noopener noreferrer");
           btn.removeAttribute("aria-disabled");
         } else {
           btn.classList.add("is-disabled");
           btn.setAttribute("href", "#");
-          btn.removeAttribute("download");
+          btn.removeAttribute("target");
+          btn.removeAttribute("rel");
           btn.setAttribute("aria-disabled", "true");
         }
         hint.textContent = ok
-          ? "Download liberado."
-          : "Marque a caixa acima para habilitar o download.";
+          ? "Clique para ir ao repositório no GitHub."
+          : "Marque a caixa acima para habilitar.";
       }
 
       cb.addEventListener("change", sync);
